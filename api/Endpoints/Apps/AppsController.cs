@@ -2,14 +2,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Endpoints
 {
-    [ApiController]
-    public class AppsController : ControllerBase
+  [ApiController]
+  public class AppsController : ControllerBase
+  {
+    [HttpGet]
+    [Route("v1/apps")]
+    public IActionResult Get()
     {
-        [HttpGet]
-        [Route("v1/apps")]
-        public IActionResult Get()
-        {
-            return Ok("apps v1");
-        }
+      return Ok("apps v1");
     }
+  }
 }
