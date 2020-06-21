@@ -1,5 +1,5 @@
 <Project>
- <PropertyGroup>
-   <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
- </PropertyGroup>
+  <PropertyGroup>
+    <DisableImplicitNuGetFallbackFolder>true</DisableImplicitNuGetFallbackFolder>
+  </PropertyGroup>
 </Project>
