@@ -4,11 +4,11 @@ using MongoDB.Driver;
 
 namespace Init.Api
 {
-  public interface IScript
-  {
-    Task Apply(
-      IMongoDatabase database,
-      CancellationToken cancellationToken
-    );
-  }
+	public interface IScript
+	{
+		Task Apply(
+			IMongoDatabase database,
+			CancellationToken cancellationToken
+		);
+	}
 }
