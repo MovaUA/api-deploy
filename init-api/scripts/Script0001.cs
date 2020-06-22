@@ -7,11 +7,11 @@ namespace Init.Api.Scripts
 {
   public class Script0001 : IScript
   {
-    public Task Apply(IMongoDatabase database, CancellationToken cancellationToken)
+    public async Task Apply(IMongoDatabase database, CancellationToken cancellationToken)
     {
       if (database == null) throw new ArgumentNullException(nameof(database));
 
-      return Task.CompletedTask;
+      await database.CreateCollectionAsync("versions").ConfigureAwait(false);
     }
   }
 }
