@@ -1,31 +1,25 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using MongoDB.Driver;
+using JetBrains.Annotations;
 
 namespace Init.Api
 {
-	public class VersionScript<TScript> : IVersionScript
-		where TScript : IScript, new()
-	{
-		private TScript script;
+  public class VersionScript : IVersionScript
+  {
+    private readonly IScript script;
 
-		public int Version { get; }
+    public int Version { get; }
 
-		public VersionScript(int version)
-		{
-			Version = version;
-			this.script = new TScript();
-		}
+    public VersionScript(int version, [NotNull] IScript script)
+    {
+      Version = version;
+      this.script = script ?? throw new ArgumentNullException(nameof(script));
+    }
 
-		public Task Apply(
-			IMongoDatabase database,
-			CancellationToken cancellationToken = default
-		)
-		{
-			if (database == null) throw new ArgumentNullException(nameof(database));
-
-			return this.script.Apply(database, cancellationToken);
-		}
-	}
+    public Task Apply(CancellationToken cancellationToken = default)
+    {
+      return this.script.Apply(cancellationToken);
+    }
+  }
 }
