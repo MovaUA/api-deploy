@@ -6,6 +6,8 @@ namespace Init.Api
 {
 	public interface IScript
 	{
+		int Version { get; }
+
 		Task Apply(
 			IMongoDatabase database,
 			CancellationToken cancellationToken

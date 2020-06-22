@@ -35,7 +35,7 @@ namespace Init.Api
 			services.AddMongoDb(context.Configuration, "mongo");
 			services.AddCollection<DbVersion>("versions");
 			services.AddSingleton<IVersionRepository, VersionRepository>();
-			services.AddSingleton(sp => ScriptRegistry.Create());
+			services.AddSingleton<IScriptRegistry, ScriptRegistry>();
 			services.AddHostedService<ScriptService>();
 		}
 	}

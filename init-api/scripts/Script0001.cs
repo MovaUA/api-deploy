@@ -6,6 +6,8 @@ namespace Init.Api.Scripts
 {
 	public class Script0001 : IScript
 	{
+		public int Version => 1;
+
 		public Task Apply(
 			IMongoDatabase database,
 			CancellationToken cancellationToken
