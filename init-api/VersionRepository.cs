@@ -24,7 +24,7 @@ namespace Init.Api
 					   .FirstOrDefaultAsync(cancellationToken);
 		}
 
-		public Task Insert([NotNull] DbVersion version, CancellationToken cancellationToken = default)
+		public Task Insert(DbVersion version, CancellationToken cancellationToken = default)
 		{
 			if (version == null) throw new ArgumentNullException(nameof(version));
 

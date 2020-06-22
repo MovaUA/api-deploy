@@ -6,6 +6,7 @@ namespace Init.Api
 {
 	public interface IVersionRepository
 	{
+		[ItemCanBeNull]
 		Task<DbVersion> FindLatest(CancellationToken cancellationToken = default);
 
 		Task Insert([NotNull] DbVersion version, CancellationToken cancellationToken = default);
