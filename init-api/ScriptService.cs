@@ -1,30 +1,35 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using MongoDB.Driver;
 using Newtonsoft.Json;
 
 namespace Init.Api
 {
 	public class ScriptService : BackgroundService
 	{
+		private readonly ILogger<ScriptService> logger;
 		private readonly IVersionRepository versionRepository;
 		private readonly IScriptRegistry scripts;
 		private readonly IHostApplicationLifetime appLifetime;
-		private readonly ILogger<ScriptService> logger;
+		private readonly IMongoDatabase database;
 
 		public ScriptService(
-			IVersionRepository versionRepository,
-			IScriptRegistry scripts,
-			IHostApplicationLifetime appLifetime,
-			ILogger<ScriptService> logger
+			[NotNull] ILogger<ScriptService> logger,
+			[NotNull] IVersionRepository versionRepository,
+			[NotNull] IScriptRegistry scripts,
+			[NotNull] IHostApplicationLifetime appLifetime,
+			[NotNull] IMongoDatabase database
 		)
 		{
-			this.versionRepository = versionRepository;
-			this.scripts = scripts;
-			this.appLifetime = appLifetime;
-			this.logger = logger;
+			this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+			this.versionRepository = versionRepository ?? throw new ArgumentNullException(nameof(versionRepository));
+			this.scripts = scripts ?? throw new ArgumentNullException(nameof(scripts));
+			this.appLifetime = appLifetime ?? throw new ArgumentNullException(nameof(appLifetime));
+			this.database = database ?? throw new ArgumentNullException(nameof(database));
 		}
 
 		protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -58,7 +63,7 @@ namespace Init.Api
 			{
 				this.logger.LogInformation(1000, "Applying script: version: {0} script: {1}", script.Version, script.GetType().FullName);
 
-				await script.Apply(null, cancellationToken).ConfigureAwait(false);
+				await script.Apply(this.database, cancellationToken).ConfigureAwait(false);
 
 				latest =
 					new DbVersion

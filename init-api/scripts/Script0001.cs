@@ -8,10 +8,7 @@ namespace Init.Api.Scripts
 	{
 		public int Version => 1;
 
-		public Task Apply(
-			IMongoDatabase database,
-			CancellationToken cancellationToken
-		)
+		public Task Apply(IMongoDatabase database, CancellationToken cancellationToken)
 		{
 			return Task.CompletedTask;
 		}
