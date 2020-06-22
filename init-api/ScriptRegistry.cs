@@ -7,51 +7,31 @@ namespace Init.Api
 {
 	public class ScriptRegistry : IScriptRegistry
 	{
-		private readonly IReadOnlyDictionary<int, IScript> scripts;
+		private readonly IReadOnlyDictionary<int, IVersionScript> scripts;
 
 		public ScriptRegistry()
 		{
 			this.scripts = Create();
 		}
 
-		public bool TryGetNext(int? version, out IScript script)
-		{
-			if (this.scripts.Count == 0)
-			{
-				script = null;
-				return false;
-			}
-
-			if (!version.HasValue)
-			{
-				script = this.scripts[this.scripts.Keys.Min()];
-				return true;
-			}
-
-			var nextVersion =
-				this.scripts.Keys
-					.Where(v => v > version)
-					.OrderBy(v => v)
-					.Select(v => (int?) v)
-					.FirstOrDefault();
-
-			if (!nextVersion.HasValue)
-			{
-				script = null;
-				return false;
-			}
-
-			script = this.scripts[nextVersion.Value];
-			return true;
-		}
-
-		private static IReadOnlyDictionary<int, IScript> Create()
+		public IEnumerable<IVersionScript> GetNext(int? version)
 		{
 			return
-				new ReadOnlyDictionary<int, IScript>(
-					new IScript[]
+				(
+					from script in this.scripts.Values
+					where !version.HasValue || script.Version > version.Value
+					select script
+				)
+				.OrderBy(s => s.Version);
+		}
+
+		private static IReadOnlyDictionary<int, IVersionScript> Create()
+		{
+			return
+				new ReadOnlyDictionary<int, IVersionScript>(
+					new IVersionScript[]
 						{
-							new Script0001(),
+							new VersionScript<Script0001>(1),
 						}
 						.ToDictionary(
 							s => s.Version

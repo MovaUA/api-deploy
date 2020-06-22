@@ -44,7 +44,7 @@ namespace Init.Api
 			}
 			catch (Exception exception)
 			{
-				this.logger.LogError(1002, exception, "An error occurred");
+				this.logger.LogError(1002, exception, "An error occurred while applying change scripts");
 				throw;
 			}
 			finally
@@ -59,22 +59,22 @@ namespace Init.Api
 
 			this.logger.LogInformation(1004, "Latest version: {0}", JsonConvert.SerializeObject(latest));
 
-			while (this.scripts.TryGetNext(latest?.Version, out var script))
+			foreach (var script in this.scripts.GetNext(latest?.Version))
 			{
-				this.logger.LogInformation(1000, "Applying script: version: {0} script: {1}", script.Version, script.GetType().FullName);
+				this.logger.LogInformation(1000, "Applying script... version: {0}", script.Version);
 
 				await script.Apply(this.database, cancellationToken).ConfigureAwait(false);
 
-				latest =
+				var newVersion =
 					new DbVersion
 					{
 						Id = Guid.NewGuid().ToString("N"),
 						Version = script.Version
 					};
 
-				await this.versionRepository.Insert(latest, cancellationToken).ConfigureAwait(false);
+				await this.versionRepository.Insert(newVersion, cancellationToken).ConfigureAwait(false);
 
-				this.logger.LogInformation(1000, "Script applied: version: {0} script: {1}", script.Version, script.GetType().FullName);
+				this.logger.LogInformation(1000, "Script applied: version: {0}", script.Version);
 			}
 		}
 	}

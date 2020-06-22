@@ -1,7 +1,9 @@
+using System.Collections.Generic;
+
 namespace Init.Api
 {
 	public interface IScriptRegistry
 	{
-		bool TryGetNext(int? version, out IScript script);
+		IEnumerable<IVersionScript> GetNext(int? version);
 	}
 }
