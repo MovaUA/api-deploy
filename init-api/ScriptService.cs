@@ -29,10 +29,10 @@ namespace Init.Api
 
 		protected override async Task ExecuteAsync(CancellationToken stoppingToken)
 		{
-			this.logger.LogInformation("Applying change scripts...");
-
 			try
 			{
+				this.logger.LogInformation("Applying change scripts...");
+
 				await ApplyScripts(stoppingToken);
 
 				this.logger.LogInformation("Change scripts applied");
