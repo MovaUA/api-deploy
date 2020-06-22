@@ -52,7 +52,7 @@ namespace Init.Api
 		{
 			var latest = await this.versionRepository.FindLatest(cancellationToken).ConfigureAwait(false);
 
-			this.logger.LogInformation(1004, "Latest version: ", JsonConvert.SerializeObject(latest));
+			this.logger.LogInformation(1004, "Latest version: {0}", JsonConvert.SerializeObject(latest));
 
 			while (this.scripts.TryGetNext(latest?.Version, out var script))
 			{
