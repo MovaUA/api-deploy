@@ -32,11 +32,11 @@ namespace Init.Api
     {
       try
       {
-        this.logger.LogInformation("Applying scripts...");
+        this.logger.LogInformation(1000, "Applying scripts...");
 
         await ApplyScripts(stoppingToken);
 
-        this.logger.LogInformation("Scripts applied");
+        this.logger.LogInformation(1001, "Scripts applied");
       }
       catch (Exception exception)
       {
@@ -53,11 +53,11 @@ namespace Init.Api
     {
       var latest = await this.versionRepository.FindLatest(cancellationToken).ConfigureAwait(false);
 
-      this.logger.LogInformation(1004, "Latest version: {0}", JsonConvert.SerializeObject(latest));
+      this.logger.LogInformation(1003, "Latest version: {0}", JsonConvert.SerializeObject(latest));
 
       foreach (var script in this.scripts.GetNext(latest?.Version))
       {
-        this.logger.LogInformation(1000, "Applying script... version: {0}", script.Version);
+        this.logger.LogInformation(1004, "Applying script... version: {0}", script.Version);
 
         await script.Apply(cancellationToken).ConfigureAwait(false);
 
@@ -70,7 +70,7 @@ namespace Init.Api
 
         await this.versionRepository.Insert(newVersion, cancellationToken).ConfigureAwait(false);
 
-        this.logger.LogInformation(1000, "Script applied: version: {0}", script.Version);
+        this.logger.LogInformation(1005, "Script applied: version: {0}", script.Version);
       }
     }
   }

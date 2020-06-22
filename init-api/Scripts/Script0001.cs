@@ -11,10 +11,15 @@ namespace Init.Api.Scripts
 {
   public class Script0001 : IScript
   {
+    private readonly IMongoCollection<DbVersion> versions;
     private readonly IMongoDatabase database;
 
-    public Script0001([NotNull] IMongoDatabase database)
+    public Script0001(
+      [NotNull] IMongoCollection<DbVersion> versions,
+      [NotNull] IMongoDatabase database
+      )
     {
+      this.versions = versions ?? throw new ArgumentNullException(nameof(versions));
       this.database = database ?? throw new ArgumentNullException(nameof(database));
     }
 
@@ -34,9 +39,7 @@ namespace Init.Api.Scripts
         new CreateIndexOptions { Unique = true }
       );
 
-      var collection = this.database.GetCollection<DbVersion>("versions");
-
-      return collection.Indexes.CreateOneAsync(indexModel, cancellationToken: cancellationToken);
+      return versions.Indexes.CreateOneAsync(indexModel, cancellationToken: cancellationToken);
     }
 
     private Task CreateApplicationCollection(CancellationToken cancellationToken)
@@ -51,18 +54,6 @@ namespace Init.Api.Scripts
       var collection = this.database.GetCollection<Application>("applications");
 
       return collection.Indexes.CreateOneAsync(indexModel, cancellationToken: cancellationToken);
-    }
-
-    [UsedImplicitly]
-    [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Local")]
-    [SuppressMessage("ReSharper", "UnusedMember.Local")]
-    private class DbVersion
-    {
-      [BsonId]
-      public string Id { get; set; }
-
-      [BsonElement("version")]
-      public int Version { get; set; }
     }
 
     [UsedImplicitly]
