@@ -43,5 +43,12 @@ spec:
           envFrom:
             - configMapRef:
                 name: testapi-config
+      initContainers:
+        - name: init-api
+          image: valeriymolchanov/init-testapi:1.0.0-0
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: testapi-config
 ---
 
