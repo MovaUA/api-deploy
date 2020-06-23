@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using JetBrains.Annotations;
 
-namespace Init.Api
+namespace Init.Api.Business
 {
 	public interface IScriptRegistry
 	{

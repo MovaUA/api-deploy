@@ -5,7 +5,7 @@ using System.Linq;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Init.Api
+namespace Init.Api.Business
 {
 	public class ScriptRegistry : IScriptRegistry
 	{

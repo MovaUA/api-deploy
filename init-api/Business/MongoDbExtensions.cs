@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 using MongoDB.Driver;
 using Newtonsoft.Json;
 
-namespace Init.Api
+namespace Init.Api.Business
 {
   public static class MongoDbExtensions
   {

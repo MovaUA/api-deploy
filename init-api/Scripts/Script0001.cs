@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
+using Init.Api.Business;
 using JetBrains.Annotations;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Driver;

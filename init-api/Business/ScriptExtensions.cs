@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Init.Api
+namespace Init.Api.Business
 {
 	public static class ScriptExtensions
 	{

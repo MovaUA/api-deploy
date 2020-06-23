@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using Init.Api.Business;
 using Init.Api.Scripts;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -50,7 +51,7 @@ namespace Init.Api
       services.AddHostedService<ScriptService>();
 
       services.AddScripts(
-        (version: 0_0001, script: typeof(Script0001))
+        (version: 0_001, script: typeof(Script0001))
       );
     }
   }
