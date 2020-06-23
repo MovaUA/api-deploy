@@ -51,7 +51,7 @@ namespace Init.Api
 			services.AddHostedService<ScriptService>();
 
 			services.AddScripts(
-				(version: 0_0001, script: typeof(Script0001))
+				(version: 0_001, script: typeof(Script0001))
 			);
 		}
 	}
