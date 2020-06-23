@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using JetBrains.Annotations;
 using MongoDB.Driver;
 
-namespace Init.Api
+namespace Init.Api.Business
 {
 	public class VersionRepository : IVersionRepository
 	{

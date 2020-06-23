@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Driver;
 
-namespace Init.Api
+namespace Init.Api.Business
 {
 	public static class MongoDbExtensions
 	{

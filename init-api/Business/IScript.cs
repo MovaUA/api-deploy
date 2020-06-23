@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 
-namespace Init.Api
+namespace Init.Api.Business
 {
 	public interface IScript
 	{

@@ -1,6 +1,6 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 
-namespace Init.Api
+namespace Init.Api.Business
 {
 	public class DbVersion
 	{

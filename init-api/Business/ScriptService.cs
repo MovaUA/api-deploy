@@ -6,7 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
-namespace Init.Api
+namespace Init.Api.Business
 {
 	public class ScriptService : BackgroundService
 	{

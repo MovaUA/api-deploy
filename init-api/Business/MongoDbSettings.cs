@@ -1,4 +1,4 @@
-namespace Init.Api
+namespace Init.Api.Business
 {
 	public class MongoDbSettings : IMongoDbSettings
 	{
