@@ -17,6 +17,8 @@ spec:
   template:
     metadata:
       labels: {{- include "api.labels" . | nindent 8 }}
+      annotations:
+        configmap/sha256sum: {{ include (print $.Template.BasePath "/api.configmap.yaml") . | sha256sum }}
     spec:
       containers:
         - name: {{ .Values.image.api }}

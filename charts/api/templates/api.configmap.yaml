@@ -6,6 +6,7 @@ metadata:
   labels:
     {{- include "api.labels" . | nindent 4 }}
 data:
+  ASPNETCORE_URLS: {{ printf "http://0.0.0.0:%v" .Values.service.internalPort }}
   MONGO__AUTHDB: "admin"
   MONGO__USER: "root"
   MONGO__PASSWORD: {{ required "Required value is missing: mongodb.mongodbRootPassword" .Values.mongodb.mongodbRootPassword | quote }}
