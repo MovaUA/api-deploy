@@ -3,14 +3,17 @@ replicaCount: 3
 imagePullSecrets: []
 
 image:
-  repository: valeriymolchanov/testapi
+  repository: valeriymolchanov
+  api: testapi
+  initApi: init-testapi
   pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
 
 db:
-  host: api-db-svc
-  port: 27017
-  user: root
-  password: test
-  selectTimeoutMS: 1000
+  name: management
+  selectTimeoutMs: 1000
+
+mongodb:
+  mongodbRootPassword: "test"
+  service:
+    name: api-mongodb
+    port: 27017

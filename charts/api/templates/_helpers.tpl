@@ -61,3 +61,17 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Returns the full name of "api" image to use
+*/}}
+{{- define "api.apiImage" -}}
+{{ printf "%s/%s:%s" .Values.image.repository .Values.image.api .Chart.AppVersion }}
+{{- end }}
+
+{{/*
+Returns the full name of "init-api" image to use
+*/}}
+{{- define "api.initApiImage" -}}
+{{ printf "%s/%s:%s" .Values.image.repository .Values.image.initApi .Chart.AppVersion }}
+{{- end }}
