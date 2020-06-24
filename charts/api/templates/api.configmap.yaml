@@ -10,7 +10,7 @@ data:
   MONGO__AUTHDB: "admin"
   MONGO__USER: "root"
   MONGO__PASSWORD: {{ required "Required value is missing: mongodb.mongodbRootPassword" .Values.mongodb.mongodbRootPassword | quote }}
-  MONGO__HOST: {{ required "Required value is missing: mongodb.service.name" .Values.mongodb.service.name | quote }}
+  MONGO__HOST: {{ printf "%s-mongodb" .Release.Name | quote }}
   MONGO__PORT: {{ required "Required value is missing: mongodb.service.port" .Values.mongodb.service.port | quote }}
   MONGO__DB: {{ required "Required value is missing: db.name" .Values.db.name | quote }}
   MONGO__SELECTTIMEOUTMS: {{ required "Required value is missing: db.selectTimeoutMs" .Values.db.selectTimeoutMs | quote }}

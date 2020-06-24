@@ -15,11 +15,10 @@ db:
 mongodb:
   mongodbRootPassword: "test"
   service:
-    name: api-mongodb
     port: 27017
 
 service:
   name: http
   type: ClusterIP
   externalPort: 80
-  internalPort: 80
+  internalPort: 8081
