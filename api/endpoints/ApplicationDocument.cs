@@ -2,14 +2,14 @@
 
 namespace Api.Endpoints
 {
-  public class ApplicationDocument
-  {
-    [BsonId]
-    [BsonRequired]
-    public string Id { get; set; }
+	public class ApplicationDocument
+	{
+		[BsonId]
+		[BsonRequired]
+		public string Id { get; set; }
 
-    [BsonElement("name")]
-    [BsonRequired]
-    public string Name { get; set; }
-  }
+		[BsonElement("name")]
+		[BsonRequired]
+		public string Name { get; set; }
+	}
 }
