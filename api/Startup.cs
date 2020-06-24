@@ -19,6 +19,7 @@ namespace Api
     {
       services.AddMongoDb(Configuration, "mongo");
       services.AddCollection<ApplicationDocument>("applications");
+      services.AddCollection<UserDocument>("users");
 
       services.AddControllers();
     }
