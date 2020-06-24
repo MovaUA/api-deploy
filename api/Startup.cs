@@ -6,28 +6,28 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Api
 {
-	public class Startup
-	{
-		public IConfiguration Configuration { get; }
+  public class Startup
+  {
+    public IConfiguration Configuration { get; }
 
-		public Startup(IConfiguration configuration)
-		{
-			Configuration = configuration;
-		}
+    public Startup(IConfiguration configuration)
+    {
+      Configuration = configuration;
+    }
 
-		public void ConfigureServices(IServiceCollection services)
-		{
-			services.AddMongoDb(Configuration, "mongo");
-			services.AddCollection<Application>("apps");
+    public void ConfigureServices(IServiceCollection services)
+    {
+      services.AddMongoDb(Configuration, "mongo");
+      services.AddCollection<ApplicationDocument>("apps");
 
-			services.AddControllers();
-		}
+      services.AddControllers();
+    }
 
-		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-		{
-			app.UseRouting();
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    {
+      app.UseRouting();
 
-			app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
-		}
-	}
+      app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+    }
+  }
 }
